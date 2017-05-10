@@ -17,7 +17,7 @@ export default class Skate extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          hola 
         </Text>
         <Text style={styles.instructions}>
           To get started, edit index.android.js
