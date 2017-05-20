@@ -12,9 +12,10 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
   },
   header: {
-    justifyContent: 'center', 
+    flexDirection: 'row', 
     alignSelf: 'stretch', 
-    alignItems: 'center', 
+    alignItems: 'center',
+    justifyContent: 'center',
     height: 56,
     backgroundColor: 'red'
   },
@@ -24,7 +25,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20, 
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
   text: {
     fontSize: 20
@@ -47,6 +49,9 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch', 
     justifyContent: 'center',
   },
+  settingsIcon: {
+    justifyContent: 'flex-end'
+  }
 });
 
 module.exports = styles;
