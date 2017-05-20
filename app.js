@@ -17,7 +17,10 @@ export default class Skate extends Component {
       degrees: "",
       direction: "",
       foot: "",
-      modalOpen: true
+      modalOpen: true,
+      twoPlayers: true,
+      canRandomize: true,
+      turn: 1
     };
   };
 
@@ -44,6 +47,36 @@ export default class Skate extends Component {
     });
   }
 
+  logro() {
+    if (this.state.twoPlayers) {
+      var turn = this.state.turn;
+      if (turn == 1) {
+        turn = 2;
+      } else {
+        turn = 1;
+      }
+      this.setState({
+        canRandomize: !this.state.canRandomize,
+        turn: turn
+      });
+    }
+  }
+
+  fallo() {
+    if (this.state.twoPlayers) {
+      var turn = this.state.turn;
+      if (turn == 1) {
+        turn = 2;
+      } else {
+        turn = 1;
+      }
+      this.setState({
+        canRandomize: !this.state.canRandomize,
+        turn: turn
+      });
+    }
+  }
+
   getRandomPosition(max) {
     var random = Math.floor(Math.random() * (max - 1));
     return random;
@@ -56,19 +89,39 @@ export default class Skate extends Component {
           <Text style={styles.headerTitle}>SKATE</Text>
         </View>
         <View>
+          {this.state.twoPlayers ? <Text style={styles.textRow}><Text style={styles.title}>Jugadador {this.state.turn}</Text></Text> : null}
+          {this.state.canRandomize ?
+            <View>
+              <Text style={styles.textRow}><Text style={styles.title}>Jugada: </Text>
+                <Text style={styles.text}>{this.state.playName}</Text></Text>
+              <Text style={styles.textRow}><Text style={styles.title}>Rotacion: </Text>
+                <Text style={styles.text}>{this.state.degrees}</Text></Text>
+              <Text style={styles.textRow}><Text style={styles.title}>Dirección: </Text>
+                <Text style={styles.text}>{this.state.direction}</Text></Text>
+              <Text style={styles.textRow}><Text style={styles.title}>Derecho Pies: </Text>
+                <Text style={styles.text}>{this.state.foot}</Text></Text>
+            </View> : null}
           <Text style={styles.textRow}><Text style={styles.title}>Jugada: </Text>
-            <Text style={styles.text}>{this.state.playName}</Text></Text>
-          <Text style={styles.textRow}><Text style={styles.title}>Rotacion: </Text>
-            <Text style={styles.text}>{this.state.degrees}</Text></Text>
-          <Text style={styles.textRow}><Text style={styles.title}>Dirección: </Text>
-            <Text style={styles.text}>{this.state.direction}</Text></Text>
-          <Text style={styles.textRow}><Text style={styles.title}>Derecho Pies: </Text>
-            <Text style={styles.text}>{this.state.foot}</Text></Text>
+            <Text style={styles.text}>{this.state.playName} {this.state.degrees} {this.state.direction} {this.state.foot}</Text>
+          </Text>
         </View>
-        <View>
-          <TouchableHighlight onPress={() => { this.randomizeGame() }} underlayColor={'rgba(0, 0, 0, 0)'}>
+        {this.state.canRandomize ?
+          <View>
+            <TouchableHighlight onPress={() => { this.randomizeGame() }} underlayColor={'rgba(0, 0, 0, 0)'}>
+              <View style={{ padding: 10, backgroundColor: 'red' }}>
+                <Text>Lanzar</Text>
+              </View>
+            </TouchableHighlight>
+          </View> : null}
+        <View style={{ flex: 1, flexDirection: 'row', margin: 40 }}>
+          <TouchableHighlight style={{ margin: 10 }} onPress={() => { this.logro() }} underlayColor={'rgba(0, 0, 0, 0)'}>
             <View style={{ padding: 10, backgroundColor: 'red' }}>
-              <Text>Jugar</Text>
+              <Text>Logro</Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight style={{ margin: 10 }} onPress={() => { this.fallo() }} underlayColor={'rgba(0, 0, 0, 0)'}>
+            <View style={{ padding: 10, backgroundColor: 'red' }}>
+              <Text>Fallo</Text>
             </View>
           </TouchableHighlight>
         </View>
