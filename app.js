@@ -25,10 +25,10 @@ export default class Skate extends Component {
   };
 
   randomizeGame() {
-    var playName = ['Jugada 1', 'Jugada 2', 'Jugada 3', 'Jugada 4', 'Jugada 5', 'Jugada 6', 'Jugada 7', 'Jugada 8'];
-    var degrees = ['90°', '180°', '270°', '360°'];
-    var direction = ['Adelante', 'Atras', 'De Lado', 'Del Otro Lado'];
-    var foot = ['Pie Derecho', 'Pie Izquierdo', 'Tercer Pie'];
+    var playName = ['Ollie', 'Kickflip', 'Heelflip', 'Pop Shove-it','Varial kikflip','Varial heelflip','Bigspin','Hard flip'];
+    var degrees = ['180°', '360°'];
+    var direction = ['Backside', 'Frontside'];
+    var foot = ['Regular', 'Goofy','Nollie','Fakie'];
 
     var pos = this.getRandomPosition(playName.length);
     var playNameResult = playName[pos];
@@ -113,7 +113,7 @@ export default class Skate extends Component {
               </View>
             </TouchableHighlight>
           </View> : null}
-        <View style={{ flex: 1, flexDirection: 'row', margin: 40 }}>
+        <View style={{flexDirection: 'row', margin: 10 }}>
           <TouchableHighlight style={{ margin: 10 }} onPress={() => { this.logro() }} underlayColor={'rgba(0, 0, 0, 0)'}>
             <View style={{ padding: 10, backgroundColor: 'red' }}>
               <Text>Logro</Text>
