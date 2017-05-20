@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import styles from './src/Styles/styles';
 
+const word = "SKATE";
+
 export default class Skate extends Component {
   constructor(props) {
     super(props);
@@ -19,17 +21,22 @@ export default class Skate extends Component {
       direction: "",
       foot: "",
       modalOpen: false,
+      infoModalOpen: false,
       twoPlayers: true,
       canRandomize: true,
-      turn: 1
+      turn: 1,
+      points: 0,
+      lost1: 0,
+      lost2: 0,
+      modalContent: null
     };
   };
 
   randomizeGame() {
-    var playName = ['Ollie', 'Kickflip', 'Heelflip', 'Pop Shove-it','Varial kikflip','Varial heelflip','Bigspin','Hard flip'];
+    var playName = ['Ollie', 'Kickflip', 'Heelflip', 'Pop Shove-it', 'Varial kikflip', 'Varial heelflip', 'Bigspin', 'Hard flip'];
     var degrees = ['180°', '360°'];
     var direction = ['Backside', 'Frontside'];
-    var foot = ['Regular', 'Goofy','Nollie','Fakie'];
+    var foot = ['Regular', 'Goofy', 'Nollie', 'Fakie'];
 
     var pos = this.getRandomPosition(playName.length);
     var playNameResult = playName[pos];
@@ -54,31 +61,74 @@ export default class Skate extends Component {
 
   logro() {
     if (this.state.twoPlayers) {
-      var turn = this.state.turn;
-      if (turn == 1) {
-        turn = 2;
-      } else {
-        turn = 1;
-      }
+      //show modal to change player
       this.setState({
-        canRandomize: !this.state.canRandomize,
-        turn: turn
+        infoModalOpen: true,
+        modalContent: <View>
+          <Text style={styles.modalTitle}>Exelente!</Text>
+          <Text style={styles.modalSubTitle}>Continua el jugador {this.state.turn == 1 ? "2" : "1"}</Text>
+          <TouchableHighlight onPress={() => { this.changeTurn() }} underlayColor={'rgba(0, 0, 0, 0)'}>
+            <View style={{ padding: 10, margin: 10, backgroundColor: 'red' }}>
+              <Text style={{ textAlign: 'center' }}>Continuar</Text>
+            </View>
+          </TouchableHighlight>
+        </View>
       });
+      //this.changeTurn();
+    } else {
+      this.setState({ points: this.state.points += 1 })
     }
+  }
+
+  changeTurn() {
+    var turn = this.state.turn;
+    if (turn == 1) {
+      turn = 2;
+    } else {
+      turn = 1;
+    }
+    this.setState({
+      canRandomize: !this.state.canRandomize,
+      turn: turn
+    });
+    this.setState({ infoModalOpen: false });
   }
 
   fallo() {
     if (this.state.twoPlayers) {
-      var turn = this.state.turn;
-      if (turn == 1) {
-        turn = 2;
+      var lost = this.state.turn == 1 ? this.state.lost1 : this.state.lost2;
+      lost += 1;
+      if (this.state.canRandomize) {
+        //this.changeTurn();
+        this.setState({
+          infoModalOpen: true,
+          modalContent: <View>
+            <Text style={styles.modalTitle}>Que mal</Text>
+            <Text style={styles.modalSubTitle}>Continua el jugador {this.state.turn == 1 ? "2" : "1"}</Text>
+            <TouchableHighlight onPress={() => { this.changeTurn() }} underlayColor={'rgba(0, 0, 0, 0)'}>
+              <View style={{ padding: 10, margin: 10, backgroundColor: 'red' }}>
+                <Text style={{ textAlign: 'center' }}>Continuar</Text>
+              </View>
+            </TouchableHighlight>
+          </View>
+        })
       } else {
-        turn = 1;
+        if (lost == word.length) {
+          //segundo tiro
+        } else if (lost > word.length) {
+          //game Over
+        } else {
+          if (this.state.turn == 1) {
+            this.setState({ lost1: lost })
+          } else {
+            this.setState({ lost2: lost })
+          }
+          //this.changeTurn();
+        }
       }
-      this.setState({
-        canRandomize: !this.state.canRandomize,
-        turn: turn
-      });
+
+    } else {
+      this.setState({ points: 0 });
     }
   }
 
@@ -144,19 +194,22 @@ export default class Skate extends Component {
                 <Text style={styles.textRow}><Text style={styles.title}>jugadores: </Text>
                   <Text style={styles.text}>{this.state.twoPlayers ? "2" : "1"}</Text></Text>
               </TouchableHighlight>
-              <Text style={styles.textRow}><Text style={styles.title}>Configuracion 2: </Text>
-                <Text style={styles.text}>configuracion 2</Text></Text>
-              <Text style={styles.textRow}><Text style={styles.title}>Configuracion 3: </Text>
-                <Text style={styles.text}>configuracion 3</Text></Text>
-              <Text style={styles.textRow}><Text style={styles.title}>Configuracion 4: </Text>
-                <Text style={styles.text}>configuracion 4</Text></Text>
-              <Text style={styles.textRow}><Text style={styles.title}>Configuracion 5: </Text>
-                <Text style={styles.text}>configuracion 5</Text></Text>
               <TouchableHighlight onPress={() => { this.setState({ modalOpen: false }) }} underlayColor={'rgba(0, 0, 0, 0)'}>
                 <View style={{ padding: 10, backgroundColor: 'red' }}>
                   <Text>Guardar</Text>
                 </View>
               </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
+        <Modal
+          animationType={"slide"}
+          transparent={true}
+          visible={this.state.infoModalOpen}
+          onRequestClose={() => console.log("hola")}>
+          <View style={styles.loadingModalContainer}>
+            <View style={styles.loadingModalContent}>
+              {this.state.modalContent}
             </View>
           </View>
         </Modal>

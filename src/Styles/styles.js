@@ -51,6 +51,16 @@ const styles = StyleSheet.create({
   },
   settingsIcon: {
     justifyContent: 'flex-end'
+  },
+  modalTitle: {
+    fontSize: 20
+  },
+  modalSubTitle: {
+    fontSize: 15
+  },
+  modalWordTitle: {
+    fontSize: 20,
+    fontWeight: 'bold'
   }
 });
 
