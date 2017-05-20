@@ -4,7 +4,8 @@ import {
   Text,
   View,
   TouchableHighlight,
-  Modal
+  Modal,
+  Image
 } from 'react-native';
 import styles from './src/Styles/styles';
 
@@ -17,7 +18,7 @@ export default class Skate extends Component {
       degrees: "",
       direction: "",
       foot: "",
-      modalOpen: true,
+      modalOpen: false,
       twoPlayers: true,
       canRandomize: true,
       turn: 1
@@ -45,6 +46,10 @@ export default class Skate extends Component {
       direction: direction,
       foot: footResult
     });
+  }
+
+  settingsPlayer() {
+    this.setState({ twoPlayers: !this.state.twoPlayers });
   }
 
   logro() {
@@ -87,6 +92,9 @@ export default class Skate extends Component {
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>SKATE</Text>
+          <TouchableHighlight onPress={() => { this.setState({ modalOpen: true }) }} style={styles.settingsIcon}>
+            <Image source={require('./src/Resources/settings_black_48.png')} />
+          </TouchableHighlight>
         </View>
         <View>
           {this.state.twoPlayers ? <Text style={styles.textRow}><Text style={styles.title}>Jugadador {this.state.turn}</Text></Text> : null}
@@ -113,7 +121,7 @@ export default class Skate extends Component {
               </View>
             </TouchableHighlight>
           </View> : null}
-        <View style={{flexDirection: 'row', margin: 10 }}>
+        <View style={{ flexDirection: 'row', margin: 10 }}>
           <TouchableHighlight style={{ margin: 10 }} onPress={() => { this.logro() }} underlayColor={'rgba(0, 0, 0, 0)'}>
             <View style={{ padding: 10, backgroundColor: 'red' }}>
               <Text>Logro</Text>
@@ -132,8 +140,10 @@ export default class Skate extends Component {
           onRequestClose={() => console.log("hola")}>
           <View style={styles.loadingModalContainer}>
             <View style={styles.loadingModalContent}>
-              <Text style={styles.textRow}><Text style={styles.title}>Configuracion 1: </Text>
-                <Text style={styles.text}>configuracion 1</Text></Text>
+              <TouchableHighlight onPress={() => { this.settingsPlayer() }} underlayColor={'rgba(0, 0, 0, 0)'}>
+                <Text style={styles.textRow}><Text style={styles.title}>jugadores: </Text>
+                  <Text style={styles.text}>{this.state.twoPlayers ? "2" : "1"}</Text></Text>
+              </TouchableHighlight>
               <Text style={styles.textRow}><Text style={styles.title}>Configuracion 2: </Text>
                 <Text style={styles.text}>configuracion 2</Text></Text>
               <Text style={styles.textRow}><Text style={styles.title}>Configuracion 3: </Text>
