@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 56,
-    backgroundColor: 'red'
+    backgroundColor: 'red',
+    
   },
   headerTitle: {
     fontSize: 30, 
@@ -50,7 +51,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   settingsIcon: {
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    right: -125
   }
 });
 
