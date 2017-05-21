@@ -59,8 +59,11 @@ const styles = StyleSheet.create({
     fontSize: 15
   },
   modalWordTitle: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold'
+  },
+  modalWinnerTitile: {
+    fontSize: 25
   }
 });
 
