@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   settingsIcon: {
 
     justifyContent: 'flex-end',
-    right: -125,
+    right: -110,
     
   },
   modalTitle: {

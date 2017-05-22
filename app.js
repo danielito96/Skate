@@ -222,7 +222,7 @@ export default class Skate extends Component {
   }
 
   getRandomPosition(max) {
-    var random = Math.floor(Math.random() * (max - 0) + 0);
+    var random = Math.floor(Math.random() * max);
     return random;
   }
 
