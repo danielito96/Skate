@@ -22,15 +22,19 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 30, 
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    right: -20,
+    color: 'black'
   },
   title: {
     fontSize: 20, 
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'black'
   },
   text: {
-    fontSize: 20
+    fontSize: 40,
+    color: 'black'
   },
   textRow: {
     padding: 16
@@ -51,8 +55,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   settingsIcon: {
+
     justifyContent: 'flex-end',
-    right: -125
+    right: -125,
+    
+  },
+  modalTitle: {
+    fontSize: 20
+  },
+  modalSubTitle: {
+    fontSize: 15
+  },
+  modalWordTitle: {
+    fontSize: 25,
+    fontWeight: 'bold'
+  },
+  modalWinnerTitile: {
+    fontSize: 25
   }
 });
 
