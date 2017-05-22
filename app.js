@@ -35,13 +35,13 @@ export default class Skate extends Component {
   randomizeGame() {
     //crea un nuevo reto para el jugador
     var playName = ['Ollie', 'Kickflip', 'Heelflip', 'Pop Shove-it', 'Varial kikflip', 'Varial heelflip', 'Bigspin', 'Hard flip'];
-    var degrees = ['180°', '360°'];
+    var degrees = ['0°', '180°', '360°'];
     var direction = ['Backside', 'Frontside'];
     var foot = ['Regular', 'Goofy', 'Nollie', 'Fakie'];
 
     var pos = this.getRandomPosition(playName.length);
     var playNameResult = playName[pos];
-    pos = this.getRandomPosition(degrees.length);
+    pos = this.getRandomPosition((degrees.length) );
     var degreesResult = degrees[pos];
     pos = this.getRandomPosition(direction.length);
     var direction = direction[pos];
@@ -222,7 +222,7 @@ export default class Skate extends Component {
   }
 
   getRandomPosition(max) {
-    var random = Math.floor(Math.random() * (max - 1));
+    var random = Math.floor(Math.random() * (max - 0) + 0);
     return random;
   }
 

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     color: 'black'
   },
   text: {
-    fontSize: 40,
+    fontSize: 20,
     color: 'black'
   },
   textRow: {
